@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AgriBot Controller</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <h1>AgriBot Remote Control</h1>
+    <div class="controller">
+        <button onclick="sendCommand('forward')">↑ Forward</button>
+        <div>
+            <button onclick="sendCommand('left')">← Left</button>
+            <button onclick="sendCommand('stop')">■ Stop</button>
+            <button onclick="sendCommand('right')">→ Right</button>
+        </div>
+        <button onclick="sendCommand('backward')">↓ Backward</button>
+        <hr>
+        <button onclick="sendCommand('spray_on')">💧 Spray ON</button>
+        <button onclick="sendCommand('spray_off')">✖ Spray OFF</button>
+    </div>
+
+    <script>
+        function sendCommand(cmd) {
+            fetch('/action', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                body: 'command=' + cmd
+            });
+        }
+    </script>
+</body>
+</html>
